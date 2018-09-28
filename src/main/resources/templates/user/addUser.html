@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}"/>
+    <title>User Registration - New User</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <form id="supplierRegForm" method="post" th:action="@{/user/add}" th:object="${user}">
+        <fieldset>
+            <legend>New User Registration Form</legend>
+            <input type="hidden" name="id" th:value="${user.id}"/>
+
+            <!-- <div class="form-group">
+                     <label for="userNumber">User Number</label>
+                     <span th:if="${#fields.hasErrors('userNumber')}" th:errors="*{userNumber}"
+                         class="alert alert-danger"></span>
+                     <input id="userNumber" name="userNumber" type="text" class="form-control" th:value="${user.userNumber}">
+             </div>-->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                      class="alert alert-danger"></span>
+                <input id="name" name="name" type="text" class="form-control" th:value="${user.name}">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+                      class="alert alert-danger"></span>
+                <input id="phone" name="phone" type="text" class="form-control" th:value="${user.phone}">
+            </div>
+
+            <div style="float:right;">
+                <a href="/users" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit" class="btn btn-outline-success">Add User</button>
+            </div>
+
+        </fieldset>
+    </form>
+</th:block>
+<th:block layout:fragment="footer"></th:block>
+</body>
+</html>

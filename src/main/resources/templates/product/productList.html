@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage/index.css}" />
+    
+    <title>Product Registration - Browse List of Products</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <div>
+            <span style="font-size: 1.5em">List of Available Products For Sale</span>
+            <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/product/add">Add Product</a>
+            </span>
+             <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/logout">Log-out</a>
+            </span>
+        </div>
+        <p>&nbsp;</p>
+        <table class="table table-hover">
+            <thead>
+                <tr >
+                    <th scope="col">#</th>
+                    <th scope="col">Product#</th>
+                    <th scope="col">Product_Name</th>
+                    <th scope="col">Owner_Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product,iterStat : ${products}">
+                    <th scope="row" th:text="${iterStat.count}"></th>
+                    <td th:text="${product.productNumber}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.user.name}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.phoneNumber}"></td>
+                    <td><image th:src="@{'/images/'+${product.image}}" width="200px" height="120px"/></td>
+                    <td><a th:href="@{'/product/edit/' + ${product.id}}"><button class="btn btn-outline-success my-1 my-sm-0" id="editbutton">Edit</button></a></td>
+                    <td><a th:href="@{'/product/delete/' + ${product.id}}"><button class="btn btn-outline-success my-2 my-sm-0" id="delbutton">Delete</button></a></td>
+                </tr>
+            </tbody>
+        </table>        
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+    
+    
+    <script th:src="@{/css/homepage/checkme.js}"></script>
+    
+</body>
+</html>

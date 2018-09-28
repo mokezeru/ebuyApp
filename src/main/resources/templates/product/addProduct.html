@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/masterlayout}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/homepage/index.css}"/>
+    <title>Product Registration - New Product</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <form id="productRegForm" method="post" th:action="@{/product/add}"
+          th:object="${product}">
+        <fieldset>
+            <legend>New Product Registration Form</legend>
+            <input type="hidden" name="id" th:value="${product.id}"/>
+
+            <div class="form-group">
+                <label for="productNumber">Product Number</label>
+                <span th:if="${#fields.hasErrors('productNumber')}" th:errors="*{productNumber}"
+                      class="alert alert-danger">
+					</span>
+                <input id="productNumber" name="productNumber" type="text" class="form-control"
+                       th:value="${product.productNumber}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></span>
+                <input id="name" name="name" type="text" class="form-control" th:value="${product.name}"/>
+            </div>
+
+            <div class="form-group">
+                <label for="user">User</label>
+                <span th:if="${#fields.hasErrors('User')}" th:errors="*{user}" class="alert alert-danger"></span>
+
+                <select class="form-control" th:field="${product.user}" id="user">
+                    <option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:text="${user.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label> <span
+                    th:if="${#fields.hasErrors('description')}"
+                    th:errors="*{description}" class="alert alert-danger"></span>
+                <input id="description" name="description" type="text"
+                       class="form-control" th:value="${product.description}"/>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label> <span
+                    th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                    class="alert alert-danger"></span> <input id="price"
+                                                              name="price" type="text" class="form-control"
+                                                              th:value="${product.price}">
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Contact</label> <span
+                    th:if="${#fields.hasErrors('description')}"
+                    th:errors="*{description}" class="alert alert-danger"></span>
+                <input id="phoneNumber" name="phoneNumber" type="text"
+                       class="form-control" th:value="${product.phoneNumber}"/>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label> <span
+                    th:if="${#fields.hasErrors('image')}" th:errors="*{image}"
+                    class="alert alert-danger"></span> <input id="image"
+                                                              name="image" type="file" class="form-control"
+                                                              th:value="${product.image}">
+            </div>
+            <div style="float: right;">
+                <a href="/products" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                <button id="btnSubmit" type="submit"
+                        class="btn btn-outline-success">Add New Product
+                </button>
+            </div>
+
+        </fieldset>
+    </form>
+</th:block>
+<th:block layout:fragment="footer"></th:block>
+</body>
+</html>
