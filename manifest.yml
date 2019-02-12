@@ -1,0 +1,7 @@
+applications:
+ - name: ebuyApp
+   path: target/ebuyApp.jar
+   buildpack: https://github.com/cloudfoundry/java-buildpack.git
+   memory: 1G
+   services:
+   - mokedb
